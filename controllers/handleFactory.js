@@ -13,7 +13,8 @@ exports.getAll=Model=>catchAsync(async (req,res,next)=>{
 })
 
 exports.getOne=Model=>catchAsync(async(req,res,next)=>{
-    const doc=await Model.findById(req.params.id)
+    //const doc=await Model.findById(req.params.id)
+    const doc=await Model.findOne({slug:req.params.slug})
 
     if(!doc) return next(new appError("No document found with the specified id",404))
 
@@ -38,7 +39,9 @@ exports.createOne=Model=>catchAsync(async(req,res,next)=>{
 })
 
 exports.deleteOne=Model=>catchAsync(async (req,res,next)=>{
-    const doc=await Model.findByIdAndDelete(req.params.id)
+    const doc=await Model.findByIdAndDelete({slug:req.params.slug},function(err,docs){
+        console.log(err)
+    })
     if(!doc) return next(new appError('No product with the specified Id',404))
 
     res.status(204).json({
@@ -48,7 +51,7 @@ exports.deleteOne=Model=>catchAsync(async (req,res,next)=>{
 })
 
 exports.updateOne=Model=>catchAsync(async (req,res,next)=>{
-    const doc=await Model.findByIdAndUpdate(req.params.id,req.body,{
+    const doc=await Model.findOneAndUpdate({slug:req.params.slug},req.body,{
         new:true,
         runValidators:true
     })

@@ -1,3 +1,4 @@
+const { urlencoded } = require('express')
 const mongoose=require('mongoose')
 
 const slugify=require('slugify')
@@ -8,12 +9,10 @@ const productSchema=new mongoose.Schema({
         required:[true,'The product must have a name'],
     },
     authorName:{
-        type:String,
-        required:[true,'A product must have an author']
+        type:String
     },
     duration:{
-        type:String,
-        required:[true,'A Tour must have a duration']
+        type:String
     },
     ratingsAverage:{
         type:Number,
@@ -45,7 +44,10 @@ const productSchema=new mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         ref:'ProductContainer',
         required:[true,"ProductContainer Id is required."]
-    }
+    },
+    stars:String,
+    forked:String,
+    repo_url:String
 })
 
 productSchema.pre('save',function(next){
