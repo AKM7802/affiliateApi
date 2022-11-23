@@ -39,9 +39,7 @@ exports.createOne=Model=>catchAsync(async(req,res,next)=>{
 })
 
 exports.deleteOne=Model=>catchAsync(async (req,res,next)=>{
-    const doc=await Model.findByIdAndDelete({slug:req.params.slug},function(err,docs){
-        console.log(err)
-    })
+    const doc=await Model.findOneAndDelete({slug:req.params.slug})
     if(!doc) return next(new appError('No product with the specified Id',404))
 
     res.status(204).json({

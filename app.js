@@ -2,6 +2,7 @@ const express=require('express')
 const ErrorController=require('./controllers/errorController')
 const productRouter=require('./routes/productRoutes')
 const containerRouter=require('./routes/pcRoutes')
+const programRouter=require('./routes/programRoutes')
 const path=require('path')
 const cors=require('cors')
 
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/api/products',productRouter)
 app.use('/api/containers',containerRouter)
+app.use('/api/programs',programRouter)
 
 app.use('/',(req,res)=>{
     res.end("AFFILIATE API PAGE")
