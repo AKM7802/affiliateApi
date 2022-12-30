@@ -20,6 +20,10 @@ const programSchema=new mongoose.Schema({
     },
     description:{
         type:String
+    },
+    output:{
+        type:String,
+        required:[true,"Please provide the code."]
     }
 })
 
