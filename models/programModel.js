@@ -23,7 +23,7 @@ const programSchema=new mongoose.Schema({
     },
     output:{
         type:String,
-        required:[true,"Please provide the code."]
+        required:[true,"Please provide the output."]
     }
 })
 
